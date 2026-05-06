@@ -1,0 +1,450 @@
+
+<h2 class="sr-only">Prospective : 5 ans de gouvernement LFI en France — projection par dimension</h2>
+
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&family=Source+Serif+4:ital,wght@0,300;0,400;1,300&display=swap');
+
+* { box-sizing: border-box; margin: 0; padding: 0; }
+
+body { background: #FAFAF8; }
+
+.page { max-width: 860px; margin: 0 auto; padding: 2rem 1.5rem 4rem; font-family: 'Source Serif 4', Georgia, serif; }
+
+.masthead { border-bottom: 2px solid #1a1a1a; padding-bottom: 1.25rem; margin-bottom: 2rem; }
+.masthead-top { display: flex; justify-content: space-between; align-items: baseline; margin-bottom: 0.5rem; }
+.channel-label { font-family: 'Source Serif 4', serif; font-size: 11px; letter-spacing: 0.12em; text-transform: uppercase; color: #888; font-weight: 300; }
+.date-label { font-size: 11px; color: #888; font-family: 'Source Serif 4', serif; font-weight: 300; }
+
+.main-title { font-family: 'Playfair Display', Georgia, serif; font-size: 2.6rem; line-height: 1.1; color: #0d0d0d; font-weight: 700; margin-bottom: 0.5rem; }
+.subtitle { font-size: 1rem; color: #444; line-height: 1.5; font-weight: 300; font-style: italic; }
+
+.alert-band { background: #C0300A; color: #fff; padding: 0.6rem 1rem; margin-bottom: 2rem; display: flex; align-items: center; gap: 0.75rem; border-radius: 2px; }
+.alert-band .alert-icon { width: 18px; height: 18px; background: #fff; border-radius: 50%; display: flex; align-items: center; justify-content: center; flex-shrink: 0; }
+.alert-band .alert-icon svg { width: 10px; height: 10px; }
+.alert-band p { font-size: 0.8rem; font-family: 'Source Serif 4', serif; font-weight: 300; letter-spacing: 0.02em; }
+.alert-band strong { font-weight: 400; }
+
+.baseline-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 1px; background: #d0d0c8; border: 1px solid #d0d0c8; margin-bottom: 2.5rem; border-radius: 4px; overflow: hidden; }
+.baseline-cell { background: #FAFAF8; padding: 0.9rem 0.8rem; }
+.baseline-cell .bl-label { font-size: 10px; text-transform: uppercase; letter-spacing: 0.1em; color: #999; font-family: 'Source Serif 4', serif; font-weight: 300; margin-bottom: 0.35rem; }
+.baseline-cell .bl-value { font-size: 1.45rem; font-family: 'Playfair Display', serif; color: #0d0d0d; line-height: 1; }
+.baseline-cell .bl-sub { font-size: 10px; color: #888; margin-top: 0.2rem; font-style: italic; }
+
+.section { margin-bottom: 2.5rem; border-top: 1px solid #d0d0c8; padding-top: 1.5rem; }
+.section-header { display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 1.2rem; gap: 1rem; }
+.section-title-block { flex: 1; }
+.section-num { font-size: 10px; text-transform: uppercase; letter-spacing: 0.12em; color: #aaa; font-family: 'Source Serif 4', serif; margin-bottom: 0.25rem; }
+.section-title { font-family: 'Playfair Display', serif; font-size: 1.25rem; color: #0d0d0d; font-weight: 700; }
+
+.risk-badge { flex-shrink: 0; padding: 0.3rem 0.75rem; font-size: 11px; font-family: 'Source Serif 4', serif; font-weight: 300; letter-spacing: 0.08em; text-transform: uppercase; border-radius: 2px; }
+.risk-critique { background: #C0300A; color: #fff; }
+.risk-eleve { background: #D4691A; color: #fff; }
+.risk-modere { background: #7A6020; color: #fff; }
+
+.two-col { display: grid; grid-template-columns: 1fr 1fr; gap: 1.5rem; }
+.three-col { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 1rem; }
+
+.proj-card { background: #F2F0EB; border-left: 3px solid #C0300A; padding: 0.9rem 1rem; border-radius: 0 4px 4px 0; }
+.proj-card.amber { border-left-color: #D4691A; }
+.proj-card.green { border-left-color: #2E7D32; }
+.proj-card .proj-label { font-size: 10px; text-transform: uppercase; letter-spacing: 0.1em; color: #888; margin-bottom: 0.4rem; }
+.proj-card .proj-val { font-family: 'Playfair Display', serif; font-size: 1.5rem; color: #0d0d0d; line-height: 1.1; }
+.proj-card .proj-sub { font-size: 12px; color: #666; margin-top: 0.25rem; font-style: italic; }
+
+.gauge-wrap { display: flex; flex-direction: column; gap: 0.6rem; }
+.gauge-row { display: flex; flex-direction: column; gap: 0.25rem; }
+.gauge-labels { display: flex; justify-content: space-between; font-size: 11px; color: #888; font-family: 'Source Serif 4', serif; }
+.gauge-track { height: 8px; background: #E2DFD8; border-radius: 4px; position: relative; overflow: visible; }
+.gauge-fill { height: 100%; border-radius: 4px; position: absolute; top: 0; left: 0; transition: width 1s ease; }
+.gauge-marker { width: 2px; height: 14px; background: #C0300A; position: absolute; top: -3px; transform: translateX(-50%); border-radius: 1px; }
+.gauge-name { font-size: 12px; color: #444; font-family: 'Source Serif 4', serif; font-weight: 300; }
+
+.chart-wrap { position: relative; width: 100%; }
+.chart-label-row { display: flex; gap: 16px; margin-bottom: 8px; font-size: 11px; color: #888; flex-wrap: wrap; }
+.chart-label-row span { display: flex; align-items: center; gap: 4px; }
+.chart-label-row .dot { width: 8px; height: 8px; border-radius: 2px; flex-shrink: 0; }
+
+.mechanism-list { list-style: none; display: flex; flex-direction: column; gap: 0.5rem; }
+.mechanism-list li { font-size: 0.875rem; color: #444; padding-left: 1.25rem; position: relative; line-height: 1.5; font-weight: 300; }
+.mechanism-list li::before { content: '→'; position: absolute; left: 0; color: #C0300A; font-size: 0.8rem; top: 0.05rem; }
+
+.precede-box { background: #F2F0EB; border: 1px solid #d0d0c8; padding: 0.75rem 1rem; border-radius: 4px; font-size: 0.8rem; color: #555; font-style: italic; line-height: 1.5; }
+.precede-box strong { font-style: normal; font-weight: 400; color: #333; }
+
+.divider-thin { border: none; border-top: 1px solid #E2DFD8; margin: 1.25rem 0; }
+
+.fiscal-table { width: 100%; border-collapse: collapse; font-size: 0.825rem; }
+.fiscal-table th { text-align: left; font-size: 10px; text-transform: uppercase; letter-spacing: 0.08em; color: #aaa; padding: 0 0 0.5rem; font-weight: 300; border-bottom: 1px solid #d0d0c8; }
+.fiscal-table th:not(:first-child) { text-align: right; }
+.fiscal-table td { padding: 0.45rem 0; border-bottom: 1px solid #f0ede8; color: #333; vertical-align: top; }
+.fiscal-table td:not(:first-child) { text-align: right; font-family: 'Playfair Display', serif; font-size: 1rem; }
+.fiscal-table .neg { color: #C0300A; }
+.fiscal-table .pos { color: #2E7D32; }
+
+.index-final { background: #0d0d0d; color: #FAFAF8; padding: 1.5rem; border-radius: 4px; display: flex; align-items: center; gap: 2rem; }
+.index-score { font-family: 'Playfair Display', serif; font-size: 3.5rem; color: #E8C070; line-height: 1; flex-shrink: 0; }
+.index-text h3 { font-family: 'Playfair Display', serif; font-size: 1rem; color: #FAFAF8; margin-bottom: 0.4rem; }
+.index-text p { font-size: 0.8rem; color: #aaa; line-height: 1.5; font-weight: 300; }
+
+.footnote { font-size: 11px; color: #aaa; font-style: italic; margin-top: 2rem; border-top: 1px solid #E2DFD8; padding-top: 1rem; line-height: 1.6; font-weight: 300; }
+
+@media (max-width: 560px) {
+  .two-col, .three-col { grid-template-columns: 1fr; }
+  .baseline-grid { grid-template-columns: repeat(2, 1fr); }
+  .main-title { font-size: 1.9rem; }
+  .index-final { flex-direction: column; gap: 1rem; }
+}
+</style>
+
+<div class="page">
+
+  <div class="masthead">
+    <div class="masthead-top">
+      <span class="channel-label">Victor Ferry Business & News — Analyse prospective</span>
+      <span class="date-label">Modélisation 2026–2031</span>
+    </div>
+    <h1 class="main-title">5 ans de LFI au pouvoir :<br>où va la France ?</h1>
+    <p class="subtitle">Projection par mécanismes causaux à partir de l'état réel des finances publiques, de la démographie et du programme de Mélenchon (2027).</p>
+  </div>
+
+  <div class="alert-band">
+    <div class="alert-icon">
+      <svg viewBox="0 0 10 10" fill="none"><path d="M5 1L9 9H1L5 1Z" fill="#C0300A"/><rect x="4.5" y="4" width="1" height="3" fill="white"/><rect x="4.5" y="7.5" width="1" height="1" fill="white"/></svg>
+    </div>
+    <p>Point de départ 2026 : déficit à <strong>5,1 % du PIB</strong> · Dette à <strong>115,6 % du PIB</strong> · Charges d'intérêts : <strong>65 Md€/an</strong> → cap vers 100 Md€ d'ici 2029</p>
+  </div>
+
+  <div class="baseline-grid">
+    <div class="baseline-cell">
+      <div class="bl-label">Déficit public</div>
+      <div class="bl-value">5,1 %</div>
+      <div class="bl-sub">du PIB — 2025</div>
+    </div>
+    <div class="baseline-cell">
+      <div class="bl-label">Dette publique</div>
+      <div class="bl-value">115,6 %</div>
+      <div class="bl-sub">du PIB — 2025</div>
+    </div>
+    <div class="baseline-cell">
+      <div class="bl-label">Dépenses publiques</div>
+      <div class="bl-value">57,2 %</div>
+      <div class="bl-sub">PIB — 2e rang UE</div>
+    </div>
+    <div class="baseline-cell">
+      <div class="bl-label">Prélèvements obligatoires</div>
+      <div class="bl-value">43,6 %</div>
+      <div class="bl-sub">PIB — record historique</div>
+    </div>
+  </div>
+
+  <!-- SECTION 1 : FINANCES PUBLIQUES -->
+  <div class="section">
+    <div class="section-header">
+      <div class="section-title-block">
+        <div class="section-num">Dimension 01</div>
+        <div class="section-title">Finances publiques & dette</div>
+      </div>
+      <div class="risk-badge risk-critique">Risque critique</div>
+    </div>
+
+    <div class="three-col" style="margin-bottom: 1.25rem;">
+      <div class="proj-card">
+        <div class="proj-label">Déficit projeté — an 3</div>
+        <div class="proj-val">8–12 %</div>
+        <div class="proj-sub">du PIB (fourchette)</div>
+      </div>
+      <div class="proj-card">
+        <div class="proj-label">Dépenses nouvelles</div>
+        <div class="proj-val">+332 Md€</div>
+        <div class="proj-sub">par an — Institut Montaigne</div>
+      </div>
+      <div class="proj-card">
+        <div class="proj-label">Dette — an 5</div>
+        <div class="proj-val">&gt; 145 %</div>
+        <div class="proj-sub">du PIB (scénario central)</div>
+      </div>
+    </div>
+
+    <div class="chart-label-row">
+      <span><span class="dot" style="background:#1a6bb5;"></span>Trajectoire tendancielle</span>
+      <span><span class="dot" style="background:#C0300A;"></span>Avec programme LFI</span>
+    </div>
+    <div class="chart-wrap" style="height: 180px;">
+      <canvas id="debtChart" role="img" aria-label="Projection de la dette publique française 2022-2031, deux scénarios">Dette : tendanciel vs LFI.</canvas>
+    </div>
+
+    <hr class="divider-thin">
+    <ul class="mechanism-list">
+      <li>Le programme LFI prévoit ~108 Md€ de recettes supplémentaires, mais ignore la fuite de la base imposable (contribuables ultra-concentrés = base ultra-fragile)</li>
+      <li>Déficit entre 7,5 et 9 % dès la 1ère année selon l'Institut Montaigne, avant effets de comportement</li>
+      <li>Déclenchement probable d'une crise obligataire : écartement des spreads, perte de notation, hausse des taux → cercle vicieux</li>
+      <li>Charges d'intérêts dépassant 120 Md€ en fin de quinquennat — premier poste budgétaire devant l'Éducation</li>
+    </ul>
+  </div>
+
+  <!-- SECTION 2 : FISCALITÉ -->
+  <div class="section">
+    <div class="section-header">
+      <div class="section-title-block">
+        <div class="section-num">Dimension 02</div>
+        <div class="section-title">Fiscalité & fuite des contributeurs</div>
+      </div>
+      <div class="risk-badge risk-critique">Risque critique</div>
+    </div>
+
+    <div class="two-col" style="margin-bottom: 1.25rem;">
+      <div>
+        <p style="font-size: 12px; color: #888; text-transform: uppercase; letter-spacing: 0.08em; margin-bottom: 0.75rem;">État actuel de la base fiscale</p>
+        <div class="gauge-wrap">
+          <div class="gauge-row">
+            <div class="gauge-name">10 % des ménages → 75 % de l'IR</div>
+            <div class="gauge-track">
+              <div class="gauge-fill" style="width: 75%; background: #1a6bb5;"></div>
+              <div class="gauge-marker" style="left: 75%;"></div>
+            </div>
+            <div class="gauge-labels"><span>0 %</span><span style="color:#C0300A; font-weight:400;">75 %</span><span>100 %</span></div>
+          </div>
+          <div class="gauge-row">
+            <div class="gauge-name">50 % des foyers → IR nul</div>
+            <div class="gauge-track">
+              <div class="gauge-fill" style="width: 50%; background: #888;"></div>
+            </div>
+            <div class="gauge-labels"><span>0 %</span><span style="color:#555; font-weight:400;">50 %</span><span>100 %</span></div>
+          </div>
+        </div>
+      </div>
+      <div>
+        <p style="font-size: 12px; color: #888; text-transform: uppercase; letter-spacing: 0.08em; margin-bottom: 0.75rem;">Mesures LFI ciblant cette base</p>
+        <table class="fiscal-table">
+          <thead><tr><th>Mesure</th><th>Impact estimé</th></tr></thead>
+          <tbody>
+            <tr><td>ISF renforcé + patrimoine</td><td class="neg">Exil fiscal</td></tr>
+            <tr><td>IR à 100 % au-delà 33k€/m</td><td class="neg">Optimisation structure</td></tr>
+            <tr><td>Impôt universel expatriés</td><td class="neg">Désincitation retour</td></tr>
+            <tr><td>IS +50 % grands groupes</td><td class="neg">Délocalisation décisions</td></tr>
+            <tr><td>Taxe successions 12 M€ max</td><td class="neg">Transfert capital étranger</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <div class="precede-box">
+      <strong>Précédent historique — France 1981–1983 :</strong> Le programme commun de la gauche (ISF, nationalisations, 39h, retraite à 60 ans) provoque en 18 mois une fuite massive de capitaux, trois dévaluations du franc et une inversion de cap brutale. La base fiscale se contracte avant même que les dépenses nouvelles produisent leurs effets.
+    </div>
+
+    <hr class="divider-thin">
+    <ul class="mechanism-list">
+      <li>Les recettes fiscales supplémentaires seront inférieures de 30 à 50 % aux projections LFI dès l'an 2</li>
+      <li>La pression fiscale se reporte mécaniquement sur les classes moyennes — les seuls qu'on ne peut pas facilement expatrier</li>
+      <li>Prélèvements obligatoires projetés à +47–50 % du PIB — territoire inconnu en Europe hors États nordiques avec un modèle cohérent</li>
+    </ul>
+  </div>
+
+  <!-- SECTION 3 : CROISSANCE -->
+  <div class="section">
+    <div class="section-header">
+      <div class="section-title-block">
+        <div class="section-num">Dimension 03</div>
+        <div class="section-title">Croissance, emploi & compétitivité</div>
+      </div>
+      <div class="risk-badge risk-eleve">Risque élevé</div>
+    </div>
+
+    <div class="three-col" style="margin-bottom: 1.25rem;">
+      <div class="proj-card amber">
+        <div class="proj-label">Croissance — an 1–2</div>
+        <div class="proj-val">–1 à –2 %</div>
+        <div class="proj-sub">récession probable</div>
+      </div>
+      <div class="proj-card amber">
+        <div class="proj-label">Chômage</div>
+        <div class="proj-val">+3–5 pts</div>
+        <div class="proj-sub">vs niveau 2026</div>
+      </div>
+      <div class="proj-card amber">
+        <div class="proj-label">Investissements étrangers</div>
+        <div class="proj-val">–40 %</div>
+        <div class="proj-sub">scénario central</div>
+      </div>
+    </div>
+
+    <ul class="mechanism-list">
+      <li>SMIC à 1 600 € : compression des marges PME, accélération de l'automatisation, destruction nette d'emplois peu qualifiés</li>
+      <li>Retraite à 60 ans : retrait de 3–4 millions de personnes du marché du travail, cotisations supplémentaires estimées à +40–60 Md€/an</li>
+      <li>Planification écologique contraignante : fermeture accélérée de secteurs (automobile, transport routier, agriculture intensive)</li>
+      <li>"Désobéissance européenne" : risque de sanctions commerciales, blocage des fonds structurels (~15 Md€/an), tension sur l'euro</li>
+      <li>Sortie programmée du nucléaire : hausse du coût de l'énergie pour les entreprises, désindustrialisation accélérée</li>
+    </ul>
+  </div>
+
+  <!-- SECTION 4 : IMMIGRATION -->
+  <div class="section">
+    <div class="section-header">
+      <div class="section-title-block">
+        <div class="section-num">Dimension 04</div>
+        <div class="section-title">Immigration & démographie</div>
+      </div>
+      <div class="risk-badge risk-eleve">Risque élevé</div>
+    </div>
+
+    <div class="two-col" style="margin-bottom: 1.25rem; align-items: start;">
+      <div>
+        <p style="font-size: 12px; color: #888; text-transform: uppercase; letter-spacing: 0.08em; margin-bottom: 0.75rem;">Base 2026</p>
+        <div class="gauge-wrap">
+          <div class="gauge-row">
+            <div class="gauge-name">Immigrés — 11,3 % de la population</div>
+            <div class="gauge-track">
+              <div class="gauge-fill" style="width: 11.3%; background: #1a6bb5;"></div>
+              <div class="gauge-marker" style="left: 25%; background: #C0300A;"></div>
+            </div>
+            <div class="gauge-labels"><span>0 %</span><span style="color:#C0300A;">~25 % (projeté an 5)</span></div>
+          </div>
+          <div class="gauge-row">
+            <div class="gauge-name">Taux exécution OQTF actuel</div>
+            <div class="gauge-track">
+              <div class="gauge-fill" style="width: 12%; background: #888;"></div>
+            </div>
+            <div class="gauge-labels"><span>0 %</span><span style="color:#555;">~12 %</span><span>100 %</span></div>
+          </div>
+        </div>
+      </div>
+      <div>
+        <p style="font-size: 12px; color: #888; text-transform: uppercase; letter-spacing: 0.08em; margin-bottom: 0.75rem;">Programme LFI — effets directs</p>
+        <ul class="mechanism-list">
+          <li>Régularisation massive : 600–800k personnes en situation irrégulière</li>
+          <li>Fermeture des CRA → rétention impossible → OQTF à 0 % d'exécution</li>
+          <li>Droit d'asile élargi → flux humanitaires +65 % déjà en 2025, accélération</li>
+          <li>Suppression du délit de séjour irrégulier</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="precede-box">
+      <strong>Effet d'appel documenté :</strong> La régularisation espagnole de 2005 (600k personnes) a généré une augmentation des flux de +35 % dans les 3 années suivantes. La régularisation italienne de 2002 a produit le même effet. La logique est mécanique : chaque régularisation constitue un signal pour les réseaux migratoires.
+    </div>
+
+    <hr class="divider-thin">
+    <ul class="mechanism-list">
+      <li>Flux migratoires annuels projetés à 400–500k/an en régime de croisière (vs ~190k solde actuel)</li>
+      <li>Pression accrue sur logement social, sécurité sociale déficitaire, système scolaire et sanitaire</li>
+      <li>Accélération du remplacement démographique dans les tranches d'âge jeunes (15–40 ans)</li>
+    </ul>
+  </div>
+
+  <!-- SECTION 5 : LIBERTÉS -->
+  <div class="section">
+    <div class="section-header">
+      <div class="section-title-block">
+        <div class="section-num">Dimension 05</div>
+        <div class="section-title">Libertés & pluralisme médiatique</div>
+      </div>
+      <div class="risk-badge risk-modere">Risque modéré–élevé</div>
+    </div>
+
+    <div class="two-col" style="margin-bottom: 1.25rem;">
+      <div class="proj-card" style="border-left-color: #7A6020;">
+        <div class="proj-label">Vecteur législatif</div>
+        <div class="proj-val" style="font-size: 1rem; font-family: 'Source Serif 4', serif; font-weight: 400; margin-top: 0.25rem;">Loi anti-concentration médias<br>Plafond à 20 % par actionnaire<br>Financement public sélectif</div>
+      </div>
+      <div class="proj-card" style="border-left-color: #7A6020;">
+        <div class="proj-label">Vecteur judiciaire</div>
+        <div class="proj-val" style="font-size: 1rem; font-family: 'Source Serif 4', serif; font-weight: 400; margin-top: 0.25rem;">Extension des délits de haine<br>Redéfinition "islamophobie"<br>Criminalisation débat migratoire</div>
+      </div>
+    </div>
+
+    <ul class="mechanism-list">
+      <li>La loi anti-concentration vise directement CNews, Le Figaro (Dassault), BFM — les seuls médias significativement critiques de LFI</li>
+      <li>Le financement public renforcé de l'audiovisuel public crée une dépendance structurelle à la bienveillance du gouvernement</li>
+      <li>L'extension du délit d'opinion (islamophobie, "racisme systémique") réduit l'espace de débat sur l'immigration et l'identité</li>
+      <li>Autocensure progressive des journalistes et créateurs de contenu sous pression judiciaire et sociale</li>
+    </ul>
+  </div>
+
+  <!-- INDEX FINAL -->
+  <div class="index-final">
+    <div class="index-score">4,2/10</div>
+    <div class="index-text">
+      <h3>Indice de liberté projeté — France 2031 sous LFI</h3>
+      <p>Score composite sur 5 dimensions (finances publiques, fiscalité, croissance, immigration, libertés). Référence 2026 : 5,8/10. La trajectoire représente une dégradation de −1,6 point, plaçant la France sous le seuil de viabilité démocratico-libérale selon les critères de l'Indice Léviathan.</p>
+    </div>
+  </div>
+
+  <div class="chart-wrap" style="height: 200px; margin-top: 2rem;">
+    <p style="font-size: 11px; color: #aaa; text-transform: uppercase; letter-spacing: 0.08em; margin-bottom: 8px;">Projection de la dette — tendanciel vs scénario LFI (% du PIB)</p>
+    <div class="chart-label-row">
+      <span><span class="dot" style="background:#1a6bb5;"></span>Tendanciel (sans LFI)</span>
+      <span><span class="dot" style="background:#C0300A;"></span>Scénario LFI</span>
+    </div>
+    <canvas id="debtChart2" role="img" aria-label="Projection dette publique France 2022–2031 deux scénarios">Tendanciel : 115 à 127 %. LFI : 115 à 148 %.</canvas>
+  </div>
+
+  <p class="footnote">Sources : INSEE (comptes nationaux 2025), Cour des Comptes (rapport février 2026), Institut Montaigne (chiffrage programme Mélenchon), IFRAP, programme officiel LFI « L'Avenir en commun ». Les projections sont des estimations par mécanismes causaux documentés, non des modèles économétriques. Fourchettes basse/haute intégrées dans les valeurs affichées.</p>
+
+</div>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.js"></script>
+<script>
+const years = ['2022','2023','2024','2025','2026','2027','2028','2029','2030','2031'];
+const tendanciel = [111, 110, 113, 115.6, 118, 121, 124, 127, 129, 131];
+const lfi = [null, null, null, 115.6, 121, 128, 135, 141, 145, 148];
+
+new Chart(document.getElementById('debtChart2'), {
+  type: 'line',
+  data: {
+    labels: years,
+    datasets: [
+      {
+        label: 'Tendanciel',
+        data: tendanciel,
+        borderColor: '#1a6bb5',
+        backgroundColor: 'rgba(26,107,181,0.06)',
+        borderWidth: 2,
+        pointRadius: 3,
+        pointBackgroundColor: '#1a6bb5',
+        fill: true,
+        tension: 0.3
+      },
+      {
+        label: 'Scénario LFI',
+        data: lfi,
+        borderColor: '#C0300A',
+        backgroundColor: 'rgba(192,48,10,0.06)',
+        borderWidth: 2,
+        borderDash: [5, 4],
+        pointRadius: 3,
+        pointBackgroundColor: '#C0300A',
+        fill: true,
+        tension: 0.3
+      }
+    ]
+  },
+  options: {
+    responsive: true,
+    maintainAspectRatio: false,
+    plugins: {
+      legend: { display: false },
+      tooltip: {
+        callbacks: {
+          label: ctx => ctx.dataset.label + ' : ' + (ctx.raw !== null ? ctx.raw.toFixed(1) + ' %' : '—')
+        }
+      }
+    },
+    scales: {
+      x: {
+        grid: { color: 'rgba(0,0,0,0.04)' },
+        ticks: { font: { size: 11 }, color: '#aaa', maxRotation: 0 }
+      },
+      y: {
+        min: 105,
+        max: 155,
+        grid: { color: 'rgba(0,0,0,0.06)' },
+        ticks: {
+          font: { size: 11 },
+          color: '#aaa',
+          callback: v => v + ' %'
+        }
+      }
+    }
+  }
+});
+</script>
